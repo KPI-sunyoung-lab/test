@@ -51,8 +51,12 @@ export default function Sidebar({ isOpen, currentPath }: SidebarProps) {
       {isOpen && (
         <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
           <div className="p-6 border-b border-gray-200">
-            <div className="flex items-center space-x-2">
-              <Train className="w-8 h-8 text-primary-600" />
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/image/1.png" 
+                alt="Logo" 
+                className="w-10 h-10 object-contain"
+              />
               <h1 className="text-xl font-bold text-gray-900">철도 대시보드</h1>
             </div>
           </div>
