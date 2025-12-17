@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus, Search, Edit, Trash2, Mail, Phone, Shield } from 'lucide-react'
+import { Plus, Search, Edit, Trash2 } from 'lucide-react'
 
 interface User {
   id: number
@@ -60,9 +60,9 @@ const mockUsers: User[] = [
 ]
 
 export default function UserManagement() {
-  const [users, setUsers] = useState<User[]>(mockUsers)
+  const [users] = useState<User[]>(mockUsers)
   const [searchTerm, setSearchTerm] = useState('')
-  const [showAddModal, setShowAddModal] = useState(false)
+  const [, setShowAddModal] = useState(false)
 
   const filteredUsers = users.filter(
     (user) =>

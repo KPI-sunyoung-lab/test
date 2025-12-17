@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Save, Bell, Globe, Shield, Database, Mail } from 'lucide-react'
+import { Save } from 'lucide-react'
 
 interface Setting {
   id: string

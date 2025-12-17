@@ -32,7 +32,7 @@ export default function RoutePerformance() {
             formatter={(value: number) => `${value}%`}
           />
           <Bar dataKey="정시율" radius={[0, 8, 8, 0]}>
-            {data.map((entry, index) => (
+            {data.map((_, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Bar>

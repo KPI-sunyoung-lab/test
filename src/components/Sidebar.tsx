@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Train, BarChart3, Users, DollarSign, MapPin, Settings, AlertCircle, Shield } from 'lucide-react'
 import Popup from './Popup'
 
@@ -20,7 +20,7 @@ const menuItems = [
   { icon: Settings, label: '설정', path: '/settings' },
 ]
 
-export default function Sidebar({ isOpen, onToggle, currentPath }: SidebarProps) {
+export default function Sidebar({ isOpen, currentPath }: SidebarProps) {
   const [popupOpen, setPopupOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<string>('')
 

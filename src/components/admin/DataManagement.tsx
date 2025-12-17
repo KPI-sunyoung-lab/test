@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Download, Upload, Trash2, RefreshCw, Database, FileText } from 'lucide-react'
+import { Download, Trash2, RefreshCw, Database, FileText } from 'lucide-react'
 
 interface DataBackup {
   id: number
@@ -38,7 +38,7 @@ const mockBackups: DataBackup[] = [
 ]
 
 export default function DataManagement() {
-  const [backups, setBackups] = useState<DataBackup[]>(mockBackups)
+  const [backups] = useState<DataBackup[]>(mockBackups)
   const [isBackingUp, setIsBackingUp] = useState(false)
 
   const handleBackup = () => {
