@@ -19,6 +19,7 @@
 - **Tailwind CSS** - 스타일링
 - **Recharts** - 데이터 시각화
 - **Lucide React** - 아이콘
+- **Mixpanel** - 사용자 행동 분석 및 이벤트 추적
 
 ## 설치 및 실행
 
@@ -28,7 +29,21 @@
 npm install
 ```
 
-### 2. 개발 서버 실행
+### 2. 환경 변수 설정
+
+프로젝트 루트에 `.env` 파일을 생성하고 Mixpanel 토큰을 추가하세요:
+
+```bash
+VITE_MIXPANEL_TOKEN=your_mixpanel_token_here
+```
+
+**Mixpanel 토큰 얻는 방법:**
+1. [Mixpanel](https://mixpanel.com)에 가입/로그인
+2. 프로젝트 생성 또는 기존 프로젝트 선택
+3. Settings > Project Settings > Project Token 복사
+4. `.env` 파일에 토큰 입력
+
+### 3. 개발 서버 실행
 
 ```bash
 npm run dev
@@ -36,7 +51,7 @@ npm run dev
 
 브라우저에서 `http://localhost:5173`을 열어 확인하세요.
 
-### 3. 프로덕션 빌드
+### 4. 프로덕션 빌드
 
 ```bash
 npm run build
@@ -82,6 +97,37 @@ src/
 
 ### RoutePerformance
 노선별 성과 지표(정시율, 만족도, 수익)를 비교합니다.
+
+## Mixpanel 분석
+
+이 프로젝트는 Mixpanel을 사용하여 사용자 행동을 추적합니다.
+
+### 추적되는 이벤트
+
+- **Page View**: 페이지 방문 추적 (자동)
+- **Menu Item Clicked**: 사이드바 메뉴 클릭
+- **Admin Menu Clicked**: 헤더의 관리자 메뉴 클릭
+- **Notification Bell Clicked**: 알림 벨 클릭
+- **Add User Button Clicked**: 사용자 추가 버튼 클릭
+- **Edit User Clicked**: 사용자 수정 버튼 클릭
+- **Delete User Clicked**: 사용자 삭제 버튼 클릭
+- **System Settings Saved**: 시스템 설정 저장
+- **Logout Clicked**: 로그아웃 클릭
+
+### Mixpanel 유틸리티 사용
+
+```typescript
+import { trackEvent, identifyUser, setUserProperties } from './utils/mixpanel'
+
+// 이벤트 추적
+trackEvent('Button Clicked', { buttonName: 'Submit' })
+
+// 사용자 식별
+identifyUser('user123', { name: '홍길동', role: 'admin' })
+
+// 사용자 속성 설정
+setUserProperties({ plan: 'premium' })
+```
 
 ## 커스터마이징
 

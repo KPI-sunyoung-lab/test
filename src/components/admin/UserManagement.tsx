@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Plus, Search, Edit, Trash2 } from 'lucide-react'
+import { trackEvent } from '../../utils/mixpanel'
 
 interface User {
   id: number
@@ -88,7 +89,10 @@ export default function UserManagement() {
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">사용자 관리</h3>
         <button
-          onClick={() => setShowAddModal(true)}
+          onClick={() => {
+            setShowAddModal(true)
+            trackEvent('Add User Button Clicked', { page: 'User Management' })
+          }}
           className="flex items-center space-x-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -147,10 +151,16 @@ export default function UserManagement() {
                 <td className="px-4 py-3 text-sm text-gray-600">{user.lastLogin}</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center space-x-2">
-                    <button className="p-1 text-blue-600 hover:bg-blue-50 rounded">
+                    <button
+                      onClick={() => trackEvent('Edit User Clicked', { userId: user.id, userName: user.name })}
+                      className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                    >
                       <Edit className="w-4 h-4" />
                     </button>
-                    <button className="p-1 text-red-600 hover:bg-red-50 rounded">
+                    <button
+                      onClick={() => trackEvent('Delete User Clicked', { userId: user.id, userName: user.name })}
+                      className="p-1 text-red-600 hover:bg-red-50 rounded"
+                    >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>

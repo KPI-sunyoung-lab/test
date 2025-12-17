@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Save } from 'lucide-react'
+import { trackEvent } from '../../utils/mixpanel'
 
 interface Setting {
   id: string
@@ -68,6 +69,9 @@ export default function SystemSettings() {
 
   const handleSave = () => {
     setIsSaving(true)
+    trackEvent('System Settings Saved', {
+      settings: settingsState.map((s) => ({ id: s.id, value: s.value })),
+    })
     setTimeout(() => {
       setIsSaving(false)
       alert('설정이 저장되었습니다.')

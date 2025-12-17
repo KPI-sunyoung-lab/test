@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Menu, Bell, Search, User, LogOut, Settings, Shield } from 'lucide-react'
 import Popup from './Popup'
+import { trackEvent } from '../utils/mixpanel'
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -30,12 +31,18 @@ export default function Header({ onMenuClick }: HeaderProps) {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
+            <button
+              onClick={() => trackEvent('Notification Bell Clicked')}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative"
+            >
               <Bell className="w-5 h-5 text-gray-600" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
             <button
-              onClick={() => setPopupOpen(true)}
+              onClick={() => {
+                setPopupOpen(true)
+                trackEvent('Admin Menu Clicked', { location: 'header' })
+              }}
               className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <User className="w-5 h-5 text-gray-600" />
@@ -73,7 +80,13 @@ export default function Header({ onMenuClick }: HeaderProps) {
               </div>
             </button>
             <div className="border-t border-gray-200 pt-2">
-              <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors text-left text-red-600">
+              <button
+                onClick={() => {
+                  trackEvent('Logout Clicked')
+                  setPopupOpen(false)
+                }}
+                className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors text-left text-red-600"
+              >
                 <LogOut className="w-5 h-5" />
                 <div>
                   <p className="font-medium">로그아웃</p>

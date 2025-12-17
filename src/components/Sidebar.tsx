@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Train, BarChart3, Users, DollarSign, MapPin, Settings, AlertCircle, Shield } from 'lucide-react'
 import Popup from './Popup'
+import { trackEvent } from '../utils/mixpanel'
 
 interface SidebarProps {
   isOpen: boolean
@@ -30,6 +31,18 @@ export default function Sidebar({ isOpen, currentPath }: SidebarProps) {
       e.preventDefault()
       setSelectedItem(item.label)
       setPopupOpen(true)
+      trackEvent('Menu Item Clicked', {
+        menuItem: item.label,
+        path: item.path,
+        isActive: false,
+      })
+    } else {
+      // 활성 메뉴 항목 클릭 시에도 추적
+      trackEvent('Menu Item Clicked', {
+        menuItem: item.label,
+        path: item.path,
+        isActive: true,
+      })
     }
   }
 
